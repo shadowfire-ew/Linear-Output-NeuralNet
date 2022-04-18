@@ -24,3 +24,8 @@ class NeuralNet:
         hiddens is an array of integers where each represents the size of the activation array at that point
         activations is an array of functions
         """
+        if len(activations) != len(hiddens)+1:
+            raise Exception("Mismatching layers count and activation functions expected. #hiddens+output:{a} != #activations:{b}".format(a=len(hiddens)+1,b=len(activations)))
+        
+        if set(activations) != ACTIVATIONS:
+            raise Exception("Unrecognized function in activations list")
