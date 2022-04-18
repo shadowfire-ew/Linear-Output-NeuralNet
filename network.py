@@ -29,3 +29,6 @@ class NeuralNet:
         
         if set(activations) != ACTIVATIONS:
             raise Exception("Unrecognized function in activations list")
+
+if __name__ == "__main__":
+    testNN = NeuralNet(5,20,[7,6],[SIGMOID,SIGMOID,LINEAR])
