@@ -61,6 +61,34 @@ class NeuralNet:
             self._thetas.append(np.random.rand(prev+1,nex)-0.5)
             # 
             prev = nex
+    
+    def Classify(self,inarray):
+        """
+        returns the classification of the input array
+        """
+        prop = self.ForwardProp(inarray)
+        return prop[0]
+
+    def ForwardProp(self,inarray):
+        """
+        performs forward propogation
+        returns a list of all layer activations
+        this includes the input layer
+        """
+        #TODO: research if bias is actually needed
+        #       or changes when linear layers are considered
+        # setting up the activations list, primed with input
+        acts = [inarray]
+        for layer in range(len(self._thetas)):
+            # get previous activation and apply bias
+            p_layer = np.concatenate(([1],acts[-1]))
+            # apply transformation
+            n_array = np.matmul(p_layer,self._thetas[layer])
+            # apply activation function
+            activated = self._funcs[layer](n_array)
+            # save array to activations
+            acts.append(activated)
+        return acts
 
 if __name__ == "__main__":
     testNN = NeuralNet(5,20,[7,6],[SIGMOID,SIGMOID,LINEAR])
