@@ -11,3 +11,8 @@ def SIGMOID(inp):
     return(1/(1+np.exp(-inp)))
 
 ACTIVATIONS = {LINEAR,SIGMOID}
+
+class NeuralNet:
+    """
+    the base class for neural networks
+    """
