@@ -56,7 +56,11 @@ class NeuralNet:
         # the actual matrices used for transformation
         self._thetas = []
         for nex in layers:
+            # creating the theta matrix for this latyer
+            # prev+1 is to account for bias
             self._thetas.append(np.random.rand(prev+1,nex)-0.5)
+            # 
+            prev = nex
 
 if __name__ == "__main__":
     testNN = NeuralNet(5,20,[7,6],[SIGMOID,SIGMOID,LINEAR])
