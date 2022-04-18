@@ -60,3 +60,5 @@ class NeuralNet:
 
 if __name__ == "__main__":
     testNN = NeuralNet(5,20,[7,6],[SIGMOID,SIGMOID,LINEAR])
+    for theta in testNN._thetas:
+        print(theta.shape)
