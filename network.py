@@ -71,7 +71,7 @@ class NeuralNet:
 
     def ForwardProp(self,inarray):
         """
-        performs forward propogation
+        performs forward propagation
         returns a list of all layer activations
         this includes the input layer
         """
