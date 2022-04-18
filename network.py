@@ -24,11 +24,23 @@ class NeuralNet:
         hiddens is an array of integers where each represents the size of the activation array at that point
         activations is an array of functions
         """
+        # input validation section
+
+        # Making sure the activations match with the hidden layers & output
         if len(activations) != len(hiddens)+1:
             raise Exception("Mismatching layers count and activation functions expected. #hiddens+output:{a} != #activations:{b}".format(a=len(hiddens)+1,b=len(activations)))
         
+        # making sure activation functions are recognized
         if set(activations) != ACTIVATIONS:
             raise Exception("Unrecognized function in activations list")
 
+        #checking for integer values for inputs, outputs, and hiddens
+        if type(inputs) is not int:
+            raise TypeError("Expected integer value for inputs")
+        if type(outputs) is not int:
+            raise TypeError("Expected integer value for outputs")
+        for h in hiddens:
+            if type(h) is not int:
+                raise TypeError("Expected integer value for hidden layers")
 if __name__ == "__main__":
     testNN = NeuralNet(5,20,[7,6],[SIGMOID,SIGMOID,LINEAR])
