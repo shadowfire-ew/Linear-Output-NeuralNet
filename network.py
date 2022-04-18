@@ -42,5 +42,21 @@ class NeuralNet:
         for h in hiddens:
             if type(h) is not int:
                 raise TypeError("Expected integer value for hidden layers")
+        
+        # after all checks passed, can save information we need
+
+        # save our activations
+        self._funcs = activations
+
+        # begin construction of 
+        # our layer transformations
+        layers = hiddens+[outputs]
+        # the previous layer array len
+        prev = inputs
+        # the actual matrices used for transformation
+        self._thetas = []
+        for nex in layers:
+            self._thetas.append(np.random.rand(prev+1,nex)-0.5)
+
 if __name__ == "__main__":
     testNN = NeuralNet(5,20,[7,6],[SIGMOID,SIGMOID,LINEAR])
