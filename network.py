@@ -96,8 +96,59 @@ class NeuralNet:
             acts.append(activated)
         return acts
 
-    def BackProp():
-        pass
+    def BackProp(self,acts,label):
+        """
+        performs backpropagation
+        takes the layer activations list from ForwardProp
+        returns a delta_thetas list of matrices
+        """
+        label = np.array(label)
+        if len(acts) != len(self._thetas)+1:
+            raise Exception("Wrong amount of activations (expected {} got {})".format(len(self._thetas)+1,len(acts)))
+        else:
+            delta_thetas = [None]*len(self._thetas)
+            deltas = [None]*len(self._thetas)
+            for layer in range(-1,-len(acts),-1):
+                # current layer's activation level
+                this_act = acts[layer]
+                # current layer's activation function
+                this_func = self._funcs[layer]
+                # partial derivative function of this function
+                this_deriv_func = ACTIVATIONS[this_func]
+                # the partial derivative of the activation function with respect to the activating iputs
+                # because of way sigmoid and linear work, we don't actually need the inputs for the activation function
+                # just the outputs are used as inputs for the derivative
+                this_derive_vals = this_deriv_func(this_act)
+                # calculating the derivative of the cost of this layer
+                back_errr = 0
+                if layer == -1:
+                    # output layer, simple difference
+                    back_errr = label-this_act
+                else:
+                    # hidden layers
+                    # transpose theta to next
+                    thetaT = np.transpose(self._thetas[layer+1])
+                    # getting the next cost
+                    cost_next = deltas[layer+1]
+                    # bring cost back
+                    back_errr = (np.matmul(cost_next,thetaT))[1:]
+                    # don't care about cost of bias
+                # saving that cost to the deltas list
+                cost_derive = back_errr*this_derive_vals
+                deltas[layer] = cost_derive
+                # create the delta_theta part
+                # get previous activation & bias
+                preact = np.concatenate(([1],acts[layer-1]))
+                # transpose activation to vert
+                actT = preact.reshape((len(preact),1))
+                # reshape derivative
+                deriM = cost_derive.reshape((1,len(cost_derive)))
+                #matmul to make delta_theta
+                delta_theta = np.matmul(actT,deriM)
+                # save it to delta thetas
+                delta_thetas[layer] = delta_theta
+        return delta_thetas
+
 
 if __name__ == "__main__":
     testNN = NeuralNet(5,20,[7,6,10],[SIGMOID,LINEAR,SIGMOID,LINEAR])
