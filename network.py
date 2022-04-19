@@ -96,6 +96,17 @@ class NeuralNet:
             acts.append(activated)
         return acts
 
+    def Cost(self,inp,label):
+        """
+        applies squared dif cost to one classification
+        """
+        label = np.array(label)
+        guess= self.Classify(inp)
+        costs = (guess-label)
+        costs2 = costs*costs
+        costsum = sum(costs2)
+        return costsum/len(guess)
+    
     def BackProp(self,acts,label):
         """
         performs backpropagation
