@@ -10,8 +10,13 @@ def LINEAR(inp):
 def SIGMOID(inp):
     return(1/(1+np.exp(-inp)))
 
+def LINEAR_DERIVE(act):
+    return 1
 
-ACTIVATIONS = {LINEAR,SIGMOID}
+def SIGMOID_DERIVE(act):
+    return act*(1-act)
+
+ACTIVATIONS = {LINEAR:LINEAR_DERIVE,SIGMOID:SIGMOID_DERIVE}
 
 class NeuralNet:
     """
@@ -32,7 +37,7 @@ class NeuralNet:
             raise Exception("Mismatching layers count and activation functions expected. #hiddens+output:{a} != #activations:{b}".format(a=len(hiddens)+1,b=len(activations)))
         
         # making sure activation functions are recognized
-        if set(activations) != ACTIVATIONS:
+        if set(activations) != ACTIVATIONS.keys():
             raise Exception("Unrecognized function in activations list")
 
         #checking for integer values for inputs, outputs, and hiddens
