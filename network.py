@@ -3,6 +3,7 @@ the main module that handles the neural networks
 utilizes numpy for now
 """
 import numpy as np
+import time
 
 def LINEAR(inp):
     return inp
@@ -172,6 +173,85 @@ class NeuralNet:
         else:
             for i in range(len(delta_thetas)):
                 self._thetas[i] += alpha*delta_thetas[i]
+
+def TrainNet(net,data,epochs,alpha=0.05):
+    """
+    trains the neural net on the data
+    assumes type net is NeuralNet class
+        and data is list of features-labels pairs
+    epochs is number of times dataset is learned
+    alpha is learning rate
+    """
+    start = time.perf_counter()
+    # validate net
+    if not isinstance(net,NeuralNet):
+        raise TypeError("net input is not an instance of NeuralNet class")
+    # validate data
+    pinlen,poutlen = None,None
+    for x in data:
+        if len(x) != 2:
+            raise Exception("One datapoint is not a pair:",x)
+        if pinlen is not None and len(x[0]) != pinlen:
+            raise Exception("One datapoint has anomalous input:",x)
+        else:
+            pinlen = len(x[0])
+        if poutlen is not None and len(x[1]) != poutlen:
+            raise Exception("One datapoint has anomolous output:",x)
+        else:
+            poutlen = len(x[1])
+    # validate epochs
+    if type(epochs) is not int or 0 < epochs:
+        raise ValueError("Cannot run {} epochs".format(epochs))
+    # validate alpha
+    if type(alpha) is not int and type(alpha) is not float:
+        raise ValueError("Unexpected value for alpha:",alpha)
+    # if all tests pass, input valid
+    # itterate through epochs
+    print("Begining training")
+    for epoch in range(epochs):
+        # print a reminder every 10% of the way
+        if epoch%(epochs//10) == 0 and epoch != 0:
+            print("Starting epoch {}...".format(epoch))
+        for e in data:
+            x = e[0]
+            y = e[1]
+            acts = net.ForwardProp(x)
+            dthetas = net.BackProp(acts,y)
+            net.ApplyDeltaTheta(dthetas,alpha)
+    # after all epochs
+    done = time.perf_counter()-start
+    print("Done in {m} minutes and {s:.2f} seconds".format(m=done//60,s=done%60))
+
+def TestNet(net,data):
+    """
+    runs the net on the test data
+    and returns the average cost
+    """
+    # validate net
+    if not isinstance(net,NeuralNet):
+        raise TypeError("net input is not an instance of NeuralNet class")
+    # validate data
+    pinlen,poutlen = None,None
+    for x in data:
+        if len(x) != 2:
+            raise Exception("One datapoint is not a pair:",x)
+        if pinlen is not None and len(x[0]) != pinlen:
+            raise Exception("One datapoint has anomalous input:",x)
+        else:
+            pinlen = len(x[0])
+        if poutlen is not None and len(x[1]) != poutlen:
+            raise Exception("One datapoint has anomolous output:",x)
+        else:
+            poutlen = len(x[1])
+    # validation complete
+    # start summing costs
+    sumpart = 0
+    for e in data:
+        x = e[0]
+        y = e[1]
+        sumpart += net.Cost(x,y)
+    # return average
+    return sumpart/len(data)
 
 if __name__ == "__main__":
     x = [1,2,3,4,5]
