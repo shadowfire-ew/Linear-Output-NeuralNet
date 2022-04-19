@@ -73,7 +73,7 @@ class NeuralNet:
         returns the classification of the input array
         """
         prop = self.ForwardProp(inarray)
-        return prop[0]
+        return prop[-1]
 
     def ForwardProp(self,inarray):
         """
