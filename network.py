@@ -174,8 +174,22 @@ class NeuralNet:
                 self._thetas[i] += alpha*delta_thetas[i]
 
 if __name__ == "__main__":
-    testNN = NeuralNet(5,20,[7,6,10],[SIGMOID,LINEAR,SIGMOID,LINEAR])
+    x = [1,2,3,4,5]
+    y = [5,7]
+    testNN = NeuralNet(len(x),len(y),[7,6],[SIGMOID,SIGMOID,LINEAR])
+    print("thetas")
     for theta in testNN._thetas:
         print(theta.shape)
-    for act in testNN.ForwardProp([1,2,3,4,5]):
+    acts = testNN.ForwardProp(x)
+    print("activations")
+    for act in acts:
         print(act)
+    print("applying backprop")
+    dthetas = testNN.BackProp(acts,y)
+    print("Delta thetas")
+    for dtheta in dthetas:
+        print(dtheta)
+    print("Applying delta_thetas")
+    print("cost before:",testNN.Cost(x,y))
+    testNN.ApplyDeltaTheta(dthetas)
+    print("cost after:",testNN.Cost(x,y))
