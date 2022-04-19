@@ -149,6 +149,18 @@ class NeuralNet:
                 delta_thetas[layer] = delta_theta
         return delta_thetas
 
+    def ApplyDeltaTheta(self,delta_thetas,alpha=0.05):
+        """
+        takes the delta_thetas from Backprop
+        and uses them to inform changes to current thetas
+        can also be an average of many delta_thetas
+        alpha is learning rate
+        """
+        if len(delta_thetas) != len(self._thetas):
+            raise Exception("Wroung amount of delta theta (expected {} got {})".format(len(self._theta),len(delta_thetas)))
+        else:
+            for i in range(len(delta_thetas)):
+                self._thetas[i] += alpha*delta_thetas[i]
 
 if __name__ == "__main__":
     testNN = NeuralNet(5,20,[7,6,10],[SIGMOID,LINEAR,SIGMOID,LINEAR])
