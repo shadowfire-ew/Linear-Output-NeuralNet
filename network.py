@@ -10,10 +10,8 @@ def LINEAR(inp):
 def SIGMOID(inp):
     return(1/(1+np.exp(-inp)))
 
-def RELU(inp):
-    return np.maximum(inp,0)
 
-ACTIVATIONS = {LINEAR,SIGMOID,RELU}
+ACTIVATIONS = {LINEAR,SIGMOID}
 
 class NeuralNet:
     """
@@ -94,7 +92,7 @@ class NeuralNet:
         return acts
 
 if __name__ == "__main__":
-    testNN = NeuralNet(5,20,[7,6,10],[SIGMOID,RELU,SIGMOID,LINEAR])
+    testNN = NeuralNet(5,20,[7,6,10],[SIGMOID,LINEAR,SIGMOID,LINEAR])
     for theta in testNN._thetas:
         print(theta.shape)
     for act in testNN.ForwardProp([1,2,3,4,5]):
