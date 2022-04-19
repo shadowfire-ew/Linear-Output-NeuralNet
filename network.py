@@ -10,7 +10,10 @@ def LINEAR(inp):
 def SIGMOID(inp):
     return(1/(1+np.exp(-inp)))
 
-ACTIVATIONS = {LINEAR,SIGMOID}
+def RELU(inp):
+    return np.maximum(inp,0)
+
+ACTIVATIONS = {LINEAR,SIGMOID,RELU}
 
 class NeuralNet:
     """
