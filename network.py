@@ -94,7 +94,7 @@ class NeuralNet:
         return acts
 
 if __name__ == "__main__":
-    testNN = NeuralNet(5,20,[7,6],[SIGMOID,SIGMOID,LINEAR])
+    testNN = NeuralNet(5,20,[7,6,10],[SIGMOID,RELU,SIGMOID,LINEAR])
     for theta in testNN._thetas:
         print(theta.shape)
     for act in testNN.ForwardProp([1,2,3,4,5]):
