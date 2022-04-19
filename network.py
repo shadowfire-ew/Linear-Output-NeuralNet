@@ -11,7 +11,7 @@ def SIGMOID(inp):
     return(1/(1+np.exp(-inp)))
 
 def LINEAR_DERIVE(act):
-    return 1
+    return act*0+1
 
 def SIGMOID_DERIVE(act):
     return act*(1-act)
