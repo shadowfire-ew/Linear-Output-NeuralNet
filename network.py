@@ -1,4 +1,4 @@
-"""
+"""netwprk.py
 the main module that handles the neural networks
 utilizes numpy for now
 """
