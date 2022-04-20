@@ -255,8 +255,8 @@ def TestNet(net,data):
 
 if __name__ == "__main__":
     x = [1,2,3,4,5]
-    y = [5,7]
-    testNN = NeuralNet(len(x),len(y),[7,6],[SIGMOID,SIGMOID,LINEAR])
+    y = [500,700]
+    testNN = NeuralNet(len(x),len(y),[],[LINEAR])
     print("thetas")
     for theta in testNN._thetas:
         print(theta.shape)
