@@ -169,7 +169,7 @@ class NeuralNet:
         alpha is learning rate
         """
         if len(delta_thetas) != len(self._thetas):
-            raise Exception("Wroung amount of delta theta (expected {} got {})".format(len(self._theta),len(delta_thetas)))
+            raise Exception("Wrong amount of delta theta (expected {} got {})".format(len(self._theta),len(delta_thetas)))
         else:
             for i in range(len(delta_thetas)):
                 self._thetas[i] += alpha*delta_thetas[i]
