@@ -38,7 +38,7 @@ class NeuralNet:
             raise Exception("Mismatching layers count and activation functions expected. #hiddens+output:{a} != #activations:{b}".format(a=len(hiddens)+1,b=len(activations)))
         
         # making sure activation functions are recognized
-        if set(activations) != ACTIVATIONS.keys():
+        if set(activations) in set(ACTIVATIONS.keys()):
             raise Exception("Unrecognized function in activations list")
 
         #checking for integer values for inputs, outputs, and hiddens
