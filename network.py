@@ -9,7 +9,7 @@ def LINEAR(inp):
     return inp
 
 def SIGMOID(inp):
-    return(1/(1+np.exp(-inp)))
+    return np.exp(-np.logaddexp(0, -inp))
 
 def LINEAR_DERIVE(act):
     return act*0+1
