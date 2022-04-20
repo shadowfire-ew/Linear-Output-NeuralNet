@@ -210,7 +210,7 @@ def TrainNet(net,data,epochs,alpha=0.05):
     print("Begining training")
     for epoch in range(epochs):
         # print a reminder every 10% of the way
-        if epoch%(epochs//10) == 0 and epoch != 0:
+        if epochs > 10 and epoch%(epochs//10) == 0 and epoch != 0:
             print("Starting epoch {}...".format(epoch))
         for e in data:
             x = e[0]
