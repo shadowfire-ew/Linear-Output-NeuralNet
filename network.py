@@ -200,7 +200,7 @@ def TrainNet(net,data,epochs,alpha=0.05):
         else:
             poutlen = len(x[1])
     # validate epochs
-    if type(epochs) is not int or 0 < epochs:
+    if type(epochs) is not int or 0 >= epochs:
         raise ValueError("Cannot run {} epochs".format(epochs))
     # validate alpha
     if type(alpha) is not int and type(alpha) is not float:
