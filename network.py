@@ -12,7 +12,7 @@ def SIGMOID(inp):
     return np.exp(-np.logaddexp(0, -inp))
 
 def LINEAR_DERIVE(act):
-    return act*0+1
+    return np.ones(act.shape)
 
 def SIGMOID_DERIVE(act):
     return act*(1-act)
