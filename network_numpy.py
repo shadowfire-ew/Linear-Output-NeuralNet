@@ -3,6 +3,7 @@ an implementation of neural networks utilizing numpy
 """
 import numpy as np
 import time
+import network_base as nb
 
 def LINEAR(inp):
     return inp
@@ -18,7 +19,7 @@ def SIGMOID_DERIVE(act):
 
 ACTIVATIONS = {LINEAR:LINEAR_DERIVE,SIGMOID:SIGMOID_DERIVE}
 
-class NeuralNet:
+class NeuralNet(nb.NeuralNet):
     """
     the base class for neural networks
     """
