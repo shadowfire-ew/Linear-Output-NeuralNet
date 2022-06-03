@@ -17,7 +17,7 @@ def LINEAR_DERIVE(act):
 def SIGMOID_DERIVE(act):
     return act*(1-act)
 
-ACTIVATIONS = {"linear":(LINEAR,LINEAR_DERIVE),"sigmoid":(SIGMOID,SIGMOID_DERIVE)}
+ACTIVATIONS = {nb.LINEAR:(LINEAR,LINEAR_DERIVE),nb.SIGMOID:(SIGMOID,SIGMOID_DERIVE)}
 
 class NeuralNet(nb.NeuralNet):
     """
