@@ -1,6 +1,5 @@
-"""netwprk.py
-the main module that handles the neural networks
-utilizes cupy
+"""network_cupy.py
+an implementation of neural networks using CuPy
 """
 import cupy as cu
 import time

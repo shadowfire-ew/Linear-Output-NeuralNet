@@ -1,4 +1,4 @@
-"""
+"""image_datasets.py
 a module to make loading of images into a dataset easier
 """
 from PIL import Image

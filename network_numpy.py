@@ -1,6 +1,5 @@
-"""netwprk.py
-the main module that handles the neural networks
-utilizes numpy for now
+"""network_numpy.py
+an implementation of neural networks utilizing numpy
 """
 import numpy as np
 import time
