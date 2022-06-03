@@ -17,7 +17,7 @@ def LINEAR_DERIVE(act):
 def SIGMOID_DERIVE(act):
     return act*(1-act)
 
-ACTIVATIONS = {LINEAR:LINEAR_DERIVE,SIGMOID:SIGMOID_DERIVE}
+ACTIVATIONS = {"linear":(LINEAR,LINEAR_DERIVE),"sigmoid":(SIGMOID,SIGMOID_DERIVE)}
 
 class NeuralNet(nb.NeuralNet):
     """
@@ -91,8 +91,10 @@ class NeuralNet(nb.NeuralNet):
             p_layer = np.concatenate(([1],acts[-1]))
             # apply transformation
             n_array = np.matmul(p_layer,self._thetas[layer])
+            # this layer's activation function
+            act_func = ACTIVATIONS[self._funcs[layer]][0]
             # apply activation function
-            activated = self._funcs[layer](n_array)
+            activated = act_func(n_array)
             # save array to activations
             acts.append(activated)
         return acts
@@ -123,10 +125,10 @@ class NeuralNet(nb.NeuralNet):
             for layer in range(-1,-len(acts),-1):
                 # current layer's activation level
                 this_act = acts[layer]
-                # current layer's activation function
+                # current layer's activation function name
                 this_func = self._funcs[layer]
                 # partial derivative function of this function
-                this_deriv_func = ACTIVATIONS[this_func]
+                this_deriv_func = ACTIVATIONS[this_func][1]
                 # the partial derivative of the activation function with respect to the activating iputs
                 # because of way sigmoid and linear work, we don't actually need the inputs for the activation function
                 # just the outputs are used as inputs for the derivative
