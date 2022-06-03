@@ -4,7 +4,7 @@ a module to make loading of images into a dataset easier
 from PIL import Image
 import random
 import numpy as np
-import network as nn
+import network_base as nb
 
 def ReadImage(path,shuffle = False):
     """
@@ -45,7 +45,7 @@ def NetImage(net,shape):
     """
     a function to reconstruct an 
     """
-    if type(net) is not nn.NeuralNet:
+    if not isinstance(net,nb.NeuralNetwork):
         raise TypeError("Unexpected type")
     # making a blank canvas to draw on
     newimarr = np.zeros(shape,dtype=np.uint8)
