@@ -45,7 +45,7 @@ def NetImage(net,shape):
     """
     a function to reconstruct an 
     """
-    if not isinstance(net,nb.NeuralNetwork):
+    if not isinstance(net,nb.NeuralNet):
         raise TypeError("Unexpected type")
     # making a blank canvas to draw on
     newimarr = np.zeros(shape,dtype=np.uint8)
