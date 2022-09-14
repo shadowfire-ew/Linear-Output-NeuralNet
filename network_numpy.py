@@ -5,6 +5,7 @@ import numpy as np
 import time
 import network_base as nb
 
+# TODO: fix issues with funcitons
 def LINEAR(inp):
     return inp
 
